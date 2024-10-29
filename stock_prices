@@ -1,0 +1,22 @@
+import yfinance as yf
+
+def get_stock_prices(tickers):
+    prices = {}
+    for ticker in tickers:
+        stock = yf.Ticker(ticker)
+        prices[ticker] = stock.history(period='1d')['Close'][0]
+    return prices
+
+def main():
+    # List of ten stock tickers
+    tickers = ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'TSLA', 'FB', 'NFLX', 'NVDA', 'BRK-B', 'DIS']
+    
+    # Get the latest stock prices
+    stock_prices = get_stock_prices(tickers)
+    
+    # Print the stock prices
+    for ticker, price in stock_prices.items():
+        print(f"{ticker}: ${price:.2f}")
+
+if __name__ == "__main__":
+    main()
